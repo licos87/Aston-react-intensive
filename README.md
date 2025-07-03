@@ -1,1 +1,1 @@
-# Aston-react-intensive
+# React + TypeScript + Vite + FSD

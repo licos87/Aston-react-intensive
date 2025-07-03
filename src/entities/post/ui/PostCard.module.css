@@ -1,0 +1,24 @@
+.card {
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+
+  background-color: var(--bg-color-secondary);
+  box-shadow: #535bf2 0 0 10px 1px;
+}
+
+.title {
+  text-align: center;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.img {
+  min-width: 150px;
+  min-height: 150px;
+}
