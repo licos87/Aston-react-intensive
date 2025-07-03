@@ -1,0 +1,14 @@
+.link {
+  display: block;
+  height: fit-content;
+}
+
+.imgLogo {
+  display: block;
+  transition: var(--trans-default);
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 5px -4px #afafbd;
+  }
+}

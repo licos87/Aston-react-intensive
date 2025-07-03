@@ -1,0 +1,13 @@
+.title {
+  margin: 0;
+}
+
+.student {
+  margin: 0;
+  text-align: end;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
