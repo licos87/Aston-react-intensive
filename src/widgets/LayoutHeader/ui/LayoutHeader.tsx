@@ -1,5 +1,6 @@
 import type {ReactNode} from "react";
 
+import { ThemeSwitcher } from "@/features/ThemeSwitcher";
 import { CompanyLogo } from "@/shared/ui/CompanyLogo";
 import { COMPANY_URL } from "@/shared/constants";
 import { LogoAston } from '@/shared/assets';
@@ -17,6 +18,7 @@ export const LayoutHeader = ({children}: LayoutHeaderProps) => {
       <div className={cls.content}>
         {children ?? <h2 className={cls.stub}>Домашняя работа React интенсива</h2>}
       </div>
+      <ThemeSwitcher/>
     </header>
   )
 }
