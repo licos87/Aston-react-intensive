@@ -1,20 +1,34 @@
 :root {
-    --font-color: #242424;
-    --bg-color: #f2f3f7;
-    --bg-color-secondary: #fff;
-    --border-color: #c2c2c2;
-    --trans-default: 0.2s ease-in;
+  --trans-default: 0.2s ease-in;
 
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.5;
-    color: var(--font-color);
-    text-rendering: optimizelegibility;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  text-rendering: optimizelegibility;
 
-    color-scheme: light dark;
-    background-color: var(--bg-color);
+  color-scheme: light dark;
 
-    font-synthesis: none;
+  font-synthesis: none;
+}
+
+.app.light {
+  --font-color: rgba(34, 34, 34, 0.85);
+  --font-color-secondary: #646cff;
+  --bg-color: #f2f3f7;
+  --bg-color-secondary: #fff;
+  --border-color: #c2c2c2;
+}
+
+.app.dark {
+  --font-color: #c9c9cb;
+  --font-color-secondary: #77bb8e;
+  --bg-color: #25405b;
+  --bg-color-secondary: #1c64a1;
+  --border-color: #9b9b9b;
+}
+
+.app {
+  color: var(--font-color);
 }

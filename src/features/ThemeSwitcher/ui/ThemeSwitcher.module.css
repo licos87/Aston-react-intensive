@@ -1,0 +1,7 @@
+.switcher {
+  margin-block-end: auto;
+  width: 68px;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  border-radius: 5px;
+}
