@@ -1,0 +1,22 @@
+.footer {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+
+  padding: 20px;
+  border-top: 1px solid var(--border-color);
+
+  background-color: var(--bg-color-secondary);
+}
+
+.teachersList,
+.teacherInfoList {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.teacherInfoItem:nth-child(2) {
+  margin-right: 30px;
+  text-align: end;
+}

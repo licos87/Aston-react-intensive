@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  height: 100%;
+  padding: 20px;
+
+  background-color: #f2f3f7;
+}
