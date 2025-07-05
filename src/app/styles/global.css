@@ -4,8 +4,6 @@
     --bg-color-secondary: #fff;
     --border-color: #c2c2c2;
     --trans-default: 0.2s ease-in;
-    --tablet-width: 768px;
-    --desktop-width: 1440px;
 
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-weight: 400;

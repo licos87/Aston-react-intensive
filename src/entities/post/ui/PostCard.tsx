@@ -1,20 +1,22 @@
-import type { IPost } from "../model/types/post.ts";
 import cls from './PostCard.module.css'
 
 interface PostCardProps {
-  post: IPost;
+  title: string;
+  imgUrl: string;
+  imgAlt: string;
+  text: string;
 }
 
-export const PostCard = ({post}: PostCardProps) => {
+export const PostCard = ({title, imgUrl, imgAlt, text}: PostCardProps) => {
 
   return (
     <div className={cls.card}>
       <div className={cls.cardTop}>
-        <h3 className={cls.title}>{post.title}</h3>
+        <h3 className={cls.title}>{title}</h3>
       </div>
       <div className={cls.body}>
-        <img className={cls.img} src={post.imgUrl} alt={post.imgAlt}/>
-        <p className={cls.text}>{post.text}</p>
+        <img className={cls.img} src={imgUrl} alt={imgAlt}/>
+        <p className={cls.text}>{text}</p>
       </div>
     </div>
   )
