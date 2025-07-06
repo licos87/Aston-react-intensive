@@ -14,7 +14,7 @@
 }
 
 .app.light {
-  --font-color: rgba(34, 34, 34, 0.85);
+  --font-color: rgb(34 34 34 / 85%);
   --font-color-secondary: #646cff;
   --bg-color: #f2f3f7;
   --bg-color-secondary: #fff;

@@ -21,10 +21,14 @@
 
 .student {
   margin: 0;
-  text-align: end;
   font-size: 12px;
+  text-align: end;
 
   @media (width >= 768px) {
     font-size: 16px;
   }
+}
+
+.content {
+  padding-block: 20px;
 }
