@@ -18,7 +18,9 @@ export const MainLayout = ({children}: MainLayoutProps) => {
         <h2 className={cls.title}>Домашняя работа React интенсива - {STUDENT.streamNumber}&nbsp;поток</h2>
         <p className={cls.student}> Выполнил студент <a href={STUDENT.resumeLink}>{STUDENT.name}</a></p>
       </LayoutHeader>
+      <div className={cls.content}>
       {children}
+      </div>
       <LayoutFooter/>
     </div>
   )

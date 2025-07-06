@@ -1,0 +1,32 @@
+.button {
+  display: inline-block;
+
+  width: fit-content;
+  height: fit-content;
+  border-radius: 5px;
+
+  color: var(--font-color);
+}
+
+.outlined {
+  background-color: inherit;
+}
+
+.contained {
+  background-color: var(--bg-color);
+}
+
+.s {
+  padding: 5px;
+  font-size: 13px;
+}
+
+.m {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.l {
+  padding: 15px;
+  font-size: 18px;
+}
