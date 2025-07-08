@@ -14,7 +14,6 @@ type ModalProps = {
 
 export const Modal = ({children, className, onClose}: ModalProps) => {
   const modalRoot = document.getElementById('modal-root');
-  if (!modalRoot) return null;
 
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
@@ -30,6 +29,8 @@ export const Modal = ({children, className, onClose}: ModalProps) => {
       document.body.style.overflow = originalOverflow;
     }
   }, [onClose]);
+
+  if (!modalRoot) return null;
 
   const handleOverlayClick = () => {
     onClose();
