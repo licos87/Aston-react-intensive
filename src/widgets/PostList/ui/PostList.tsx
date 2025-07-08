@@ -23,13 +23,28 @@ export const PostList = () => {
 
   return (
     <>
-      <Button className={cls.infoBtn} variant="contained" size="m" onClick={handleModalToggle}>О проекте</Button>
-      {isOpen && <Modal onClose={handleModalToggle}><p>Дополнительный контент</p></Modal>}
+      <Button
+        className={cls.infoBtn}
+        variant="contained"
+        size="m"
+        onClick={handleModalToggle}
+      >О проекте</Button>
+      {isOpen && <Modal onClose={handleModalToggle}>
+        <p>Дополнительный контент</p>
+      </Modal>}
       <ul className={cls.list}>
         {
           postList.map(post => (
-            <li className={cls.item} key={post.id}>
-              <PostCard title={post.title} imgUrl={post.imgUrl} imgAlt={post.imgAlt} text={post.text}/>
+            <li
+              className={cls.item}
+              key={post.id}
+            >
+              <PostCard
+                title={post.title}
+                imgUrl={post.imgUrl}
+                imgAlt={post.imgAlt}
+                text={post.text}
+              />
             </li>
           ))
         }

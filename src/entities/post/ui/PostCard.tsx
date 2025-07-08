@@ -15,7 +15,11 @@ export const PostCard = ({title, imgUrl, imgAlt, text}: PostCardProps) => {
         <h3 className={cls.title}>{title}</h3>
       </div>
       <div className={cls.body}>
-        <img className={cls.img} src={imgUrl} alt={imgAlt}/>
+        <img
+          className={cls.img}
+          src={imgUrl}
+          alt={imgAlt}
+        />
         <p className={cls.text}>{text}</p>
       </div>
     </div>

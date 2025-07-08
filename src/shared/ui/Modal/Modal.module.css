@@ -1,15 +1,15 @@
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  inset: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+
   padding: 20px;
+
+  background: rgb(0 0 0 / 70%);
 
   @media (width >= 768px) {
     padding: 40px;
@@ -21,13 +21,16 @@
 }
 
 .modal {
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #62b67e;
-  color: #222222D8;
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  padding: 20px;
+  border-radius: 10px;
+
+  color: #222222D8;
+
+  background-color: #62b67e;
 
   @media (width >= 768px) {
     padding: 30px;
@@ -40,15 +43,15 @@
 
 .modalTop {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 10px;
-  align-items: center;
 }
 
 .title {
+  margin: 0;
   font-size: 1.25rem;
   line-height: 1.25;
-  margin: 0;
 
   @media (width >= 768px) {
     font-size: 1.35rem;
@@ -62,9 +65,9 @@
 }
 
 .text {
-  text-wrap: pretty;
-  line-height: 1.25;
   margin: 0;
+  line-height: 1.25;
+  text-wrap: pretty;
 
   @media (width >= 768px) {
     font-size: 1.15rem;
@@ -78,10 +81,10 @@
 }
 
 .closeBtn.closeBtn {
-  border-radius: 50%;
-  border: 1px solid transparent;
   cursor: pointer;
   padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
 
   &:hover {
     opacity: 0.6;
