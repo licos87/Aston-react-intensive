@@ -17,10 +17,17 @@ export const LayoutFooter = ({children}: LayoutFooterProps) => {
       <ul className={cls.teachersList}>
         {
           TEACHERS.map((teacher, i) => (
-            <li className={cls.teachersItem} key={i}>
+            <li
+              className={cls.teachersItem}
+              key={i}
+            >
               <ul className={cls.teacherInfoList}>
-                <li className={cls.teacherInfoItem}>Преподаватель <a href={teacher.profile}>{teacher.name}</a></li>
-                <li className={cls.teacherInfoItem}><a href={`mailto:{teacher.email}`}>Написать письмо</a></li>
+                <li className={cls.teacherInfoItem}>
+                  Преподаватель <a href={teacher.profile}>{teacher.name}</a>
+                </li>
+                <li className={cls.teacherInfoItem}>
+                  <a href={`mailto:{teacher.email}`}>Написать письмо</a>
+                </li>
               </ul>
             </li>
           ))

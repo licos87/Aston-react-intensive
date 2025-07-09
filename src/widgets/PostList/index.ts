@@ -1,3 +1,3 @@
-import { PostList } from "./ui/PostList.tsx";
+import { PostList } from './ui/PostList.tsx';
 
 export { PostList };

@@ -1,3 +1,3 @@
-import { MainLayout } from "./MainLayout.tsx";
+import { MainLayout } from './MainLayout.tsx';
 
 export { MainLayout };

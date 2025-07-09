@@ -1,4 +1,4 @@
-import type { IPost } from "@/entities/post";
+import type { IPost } from '@/entities/post';
 
 export const POSTS_LIST: IPost[] = [
   {

@@ -1,4 +1,4 @@
-import { POSTS_LIST } from "../mock/postsList.ts";
+import { POSTS_LIST } from '../mock/postsList.ts';
 
 export const fetchPosts = () => {
   const data = POSTS_LIST;

@@ -9,7 +9,13 @@ interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonE
   size: 's' | 'm' | 'l';
 }
 
-export const Button = ({children, variant, className, size, ...props}: ButtonProps) => {
+export const Button = ({
+                         children,
+                         variant,
+                         className,
+                         size,
+                         ...props
+                       }: ButtonProps) => {
 
   return (
     <>

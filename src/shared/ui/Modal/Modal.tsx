@@ -9,7 +9,7 @@ import cls from './Modal.module.css'
 type ModalProps = {
   children?: ReactNode;
   className?: string;
-  onClose: ()=> void;
+  onClose: () => void;
 }
 
 export const Modal = ({children, className, onClose}: ModalProps) => {
@@ -44,8 +44,17 @@ export const Modal = ({children, className, onClose}: ModalProps) => {
       <div className={clsx(cls.modal, className)} onClick={handleContentClick}>
         <div className={cls.modalTop}>
           <h4 className={cls.title}>О проекте</h4>
-          <Button className={cls.closeBtn} variant='outlined' size='s' onClick={onClose} title='Закрыть'>
-            <img src={CloseIcon} width={30} height={30} alt='Закрыть'/>
+          <Button className={cls.closeBtn}
+                  variant="outlined"
+                  size="s"
+                  onClick={onClose}
+                  title="Закрыть"
+          >
+            <img src={CloseIcon}
+                 width={30}
+                 height={30}
+                 alt="Закрыть"
+            />
           </Button>
         </div>
         <div className={cls.body}>
