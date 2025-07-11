@@ -19,14 +19,16 @@
   --bg-color: #f2f3f7;
   --bg-color-secondary: #fff;
   --border-color: #c2c2c2;
+  --hover-color: #646cff;
 }
 
 .app.dark {
   --font-color: #c9c9cb;
-  --font-color-secondary: #77bb8e;
+  --font-color-secondary: #66f897;
   --bg-color: #25405b;
   --bg-color-secondary: #1c64a1;
   --border-color: #9b9b9b;
+  --hover-color: #46a8ff;
 }
 
 .app {
