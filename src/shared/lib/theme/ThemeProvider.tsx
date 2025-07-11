@@ -1,5 +1,5 @@
 import { useState, useMemo, type FC, type ReactNode } from 'react';
-import { type Theme, ThemeContext } from './ThemeContext';
+import { type Theme, ThemeContext } from './';
 
 interface ThemeProviderProps {
   children: ReactNode;
@@ -22,7 +22,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 
   return (
     <ThemeContext.Provider value={contextValue}>
-      <div className={`app ${theme}`}>{children}</div>
+      <div className={`app ${theme}`} style={{flex: '1'}}>{children}</div>
     </ThemeContext.Provider>
   );
 };
