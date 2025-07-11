@@ -1,8 +1,8 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
-import { LayoutHeader } from "@/widgets/LayoutHeader";
-import { LayoutFooter } from "@/widgets/LayoutFooter";
-import { STUDENT } from "@/shared/constants";
+import { LayoutHeader } from '@/widgets/LayoutHeader';
+import { LayoutFooter } from '@/widgets/LayoutFooter';
+import { STUDENT } from '@/shared/constants';
 
 import cls from './MainLayout.module.css'
 
@@ -15,11 +15,14 @@ export const MainLayout = ({children}: MainLayoutProps) => {
   return (
     <div className={cls.container}>
       <LayoutHeader>
-        <h2 className={cls.title}>Домашняя работа React интенсива - {STUDENT.streamNumber} поток</h2>
-        <p className={cls.student}> Выполнил студент <a href={STUDENT.resumeLink}>{STUDENT.name}</a></p>
+        <h2 className={cls.title}>Домашняя работа React интенсива - {STUDENT.streamNumber}&nbsp;поток</h2>
+        <p className={cls.student}> Выполнил студент <a href={STUDENT.resumeLink}>{STUDENT.name}</a>
+        </p>
       </LayoutHeader>
-      {children}
-      <LayoutFooter/>
+      <div className={cls.content}>
+        {children}
+      </div>
+      <LayoutFooter />
     </div>
   )
 }

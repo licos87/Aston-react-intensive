@@ -17,3 +17,8 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.infoBtn.infoBtn {
+  border-radius: 10px;
+  font-weight: 600;
+}
