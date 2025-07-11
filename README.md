@@ -1,1 +1,1 @@
-# React + TypeScript + Vite + FSD
+# React + TypeScript + Vite + FSD 
