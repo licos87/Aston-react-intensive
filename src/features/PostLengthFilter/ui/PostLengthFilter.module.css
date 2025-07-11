@@ -1,0 +1,9 @@
+.input {
+  transition: var(--trans-default);
+
+  &:hover,
+  &:focus {
+    border-color: #535bf2;
+    opacity: 1;
+  }
+}
