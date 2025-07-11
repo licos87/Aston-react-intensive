@@ -1,4 +1,6 @@
 import cls from './PostCard.module.css'
+import { CommentList } from '@/widgets/CommentList';
+import { COMMENTS } from '@/widgets/CommentList/mock/comments.ts';
 
 interface PostCardProps {
   title: string;
@@ -22,6 +24,7 @@ export const PostCard = ({title, imgUrl, imgAlt, text}: PostCardProps) => {
         />
         <p className={cls.text}>{text}</p>
       </div>
+      <CommentList commentList={COMMENTS}/>
     </div>
   )
 }
