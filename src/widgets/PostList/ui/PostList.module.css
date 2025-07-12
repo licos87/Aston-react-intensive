@@ -22,3 +22,27 @@
   border-radius: 10px;
   font-weight: 600;
 }
+
+.controls {
+  display: flex;
+  gap: 20px;
+  justify-content: end;
+}
+
+.selectControl {
+  padding: 3px 5px;
+  background-color: transparent;
+  color: var(--font-color);
+  opacity: 0.8;
+  border-color: var(--border-color);
+  border: none;
+  outline: none;
+  border-bottom: 2px solid grey;
+  border-radius: 2px;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+    border-color: #535bf2;
+  }
+}

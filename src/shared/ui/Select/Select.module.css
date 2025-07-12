@@ -1,0 +1,8 @@
+.select {
+  transition: var(--trans-default);
+  cursor: pointer;
+  &:hover {
+    background-color: color-mix(in oklab, var(--bg-color) 85%, var(--hover-color));
+    color: color-mix(in oklab, var(--font-color) 90%, var(--hover-color));
+  }
+}

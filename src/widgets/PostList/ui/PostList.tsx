@@ -1,43 +1,39 @@
-import { useEffect, useState } from 'react';
-import { type IPost, PostCard } from '@/entities/post';
-import { Button } from '@/shared/ui/Button';
+import { useCallback, useState } from 'react';
+import { PostLengthSelect } from '@/features/PostLengthSorted';
+import { type IPost, PostCard } from '@/entities/Post';
 
-import { fetchPosts } from '../api/fetchPosts.ts';
+import { PostLengthFilter } from '@/features/PostLengthFilter/ui/PostLengthFilter.tsx';
 import cls from './PostList.module.css'
-import { Modal } from '@/shared/ui/Modal';
 
-export const PostList = () => {
-  const [postList, setPostList] = useState<IPost[]>([])
-  const [isOpen, setIsOpen] = useState(false);
+type PostListProps = {
+  data: IPost[];
+};
 
-  useEffect(() => {
-    try {
-      const postsData = fetchPosts()
-      setPostList(postsData)
-    } catch (err) {
-      console.log(err)
-    }
-  }, [])
+export const PostList = ({data}: PostListProps) => {
+  const [list, setList] = useState<IPost[]>(data)
 
-  const handleModalToggle = () => setIsOpen(!isOpen);
+  const handleChangeList = useCallback((sortedList: IPost[]) => {
+    setList(sortedList);
+  }, []);
 
   return (
     <>
-      <Button
-        className={cls.infoBtn}
-        variant="contained"
-        size="m"
-        onClick={handleModalToggle}
-      >О проекте</Button>
-      {isOpen && <Modal onClose={handleModalToggle}>
-        <p>Дополнительный контент</p>
-      </Modal>}
+      <div className={cls.controls}>
+        <PostLengthFilter
+          className={cls.selectControl}
+          defaultList={list}
+          filteredList={handleChangeList}
+        />
+        <PostLengthSelect
+          className={cls.selectControl}
+          defaultList={list}
+          sortedList={handleChangeList}
+        />
+      </div>
       <ul className={cls.list}>
         {
-          postList.map(post => (
-            <li
-              className={cls.item}
-              key={post.id}
+          list.map(post =>
+            <li className={cls.item} key={post.id}
             >
               <PostCard
                 title={post.title}
@@ -46,9 +42,10 @@ export const PostList = () => {
                 text={post.text}
               />
             </li>
-          ))
+          )
         }
       </ul>
     </>
+
   )
 }
