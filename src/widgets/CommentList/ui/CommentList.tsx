@@ -15,7 +15,6 @@ type CommentListProps = {
 export const CommentList = ({commentList}: CommentListProps) => {
   const [showAll, setShowAll] = useState(false);
   const subList = useRef<HTMLUListElement>(null);
-  console.log(commentList)
   const randomComments = useMemo(() => {
     const randomComments = randomList(commentList)
     return sortComments(randomComments);
