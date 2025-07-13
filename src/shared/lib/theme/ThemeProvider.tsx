@@ -22,7 +22,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 
   return (
     <ThemeContext.Provider value={contextValue}>
-      <div className={`app ${theme}`}>{children}</div>
+      <div className={`app ${theme}`} style={{flex: '1'}}>{children}</div>
     </ThemeContext.Provider>
   );
 };
