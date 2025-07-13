@@ -31,18 +31,20 @@
 
 .selectControl {
   padding: 3px 5px;
-  background-color: transparent;
-  color: var(--font-color);
-  opacity: 0.8;
-  border-color: var(--border-color);
   border: none;
-  outline: none;
+  border-color: var(--border-color);
   border-bottom: 2px solid grey;
   border-radius: 2px;
 
+  color: var(--font-color);
+
+  opacity: 0.8;
+  background-color: transparent;
+  outline: none;
+
   &:hover,
   &:focus {
-    opacity: 1;
     border-color: #535bf2;
+    opacity: 1;
   }
 }

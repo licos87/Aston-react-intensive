@@ -9,10 +9,11 @@ import { Button } from '@/shared/ui/Button';
 import cls from './CommentList.module.css'
 
 type CommentListProps = {
+  className?: string
   commentList: CommentType[];
 };
 
-export const CommentList = ({commentList}: CommentListProps) => {
+export const CommentList = ({className, commentList}: CommentListProps) => {
   const [showAll, setShowAll] = useState(false);
   const subList = useRef<HTMLUListElement>(null);
   const randomComments = useMemo(() => {
@@ -35,29 +36,32 @@ export const CommentList = ({commentList}: CommentListProps) => {
 
 
   return (
-    <ul className={cls.list}>
-      <li key={firstComment.id}><Comment comment={firstComment} /></li>
-      {
-        !showAll && (
+    <div className={className}>
+      <h3>Комментарии</h3>
+      <ul className={cls.list}>
+        <li key={firstComment.id}><Comment comment={firstComment} /></li>
+        {
+          !showAll && (
+            <li>
+              <Button variant="contained" size="s" onClick={handleShowComments}>Показать больше комментариев</Button>
+            </li>
+          )
+        }
+        {
+          showAll && (
+            <li>
+              <ul className={clsx(cls.list, cls.subList)} ref={subList}>
+                {coverComments?.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)}
+              </ul>
+            </li>
+          )
+        }
+        {(showAll &&
           <li>
-            <Button variant="contained" size="s" onClick={handleShowComments}>Показать больше комментариев</Button>
+            <Button variant="contained" size="s" onClick={handleCoverComments}>Показать меньше комментариев</Button>
           </li>
-        )
-      }
-      {
-        showAll && (
-          <li>
-            <ul className={clsx(cls.list, cls.subList)} ref={subList}>
-              {coverComments?.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)}
-            </ul>
-          </li>
-        )
-      }
-      {(showAll &&
-        <li>
-          <Button variant="contained" size="s" onClick={handleCoverComments}>Показать меньше комментариев</Button>
-        </li>
-      )}
-    </ul>
+        )}
+      </ul>
+    </div>
   );
 };

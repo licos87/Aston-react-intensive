@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from 'react';
+import { useState } from 'react';
 
 import { LayoutHeader } from '@/widgets/LayoutHeader';
 import { LayoutFooter } from '@/widgets/LayoutFooter';
@@ -7,12 +7,9 @@ import { Button } from '@/shared/ui/Button';
 import { Modal } from '@/shared/ui/Modal';
 
 import cls from './MainLayout.module.css'
+import { Outlet } from 'react-router-dom';
 
-interface MainLayoutProps {
-  children: ReactNode;
-}
-
-export const MainLayout = ({children}: MainLayoutProps) => {
+export const MainLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleModalToggle = () => setIsOpen(!isOpen);
@@ -24,7 +21,7 @@ export const MainLayout = ({children}: MainLayoutProps) => {
         <p className={cls.student}> Выполнил студент <a href={STUDENT.resumeLink}>{STUDENT.name}</a>
         </p>
       </LayoutHeader>
-      <div className={cls.content}>
+      <main className={cls.content}>
         <div className={cls.contentTop}>
           <Button
             className={cls.infoBtn}
@@ -38,8 +35,8 @@ export const MainLayout = ({children}: MainLayoutProps) => {
             <p>Дополнительный контент</p>
           </Modal>}
         </div>
-        {children}
-      </div>
+        <Outlet/>
+      </main>
       <LayoutFooter />
     </div>
   )

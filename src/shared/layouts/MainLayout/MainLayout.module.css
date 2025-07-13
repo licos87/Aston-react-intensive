@@ -30,11 +30,13 @@
 }
 
 .content {
-  flex: 1;
-  display: flex;
   position: relative;
-  gap: 10px;
+
+  display: flex;
+  flex: 1;
   flex-direction: column;
+  gap: 10px;
+
   padding-block: 20px;
 }
 

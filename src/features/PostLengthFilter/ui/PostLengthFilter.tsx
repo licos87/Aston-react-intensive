@@ -1,69 +1,63 @@
-import React, {
-  type ChangeEvent,
-  useEffect,
-  useRef,
-  useState
-} from 'react';
+import React, { type ChangeEvent, useEffect, useState } from 'react';
 import clsx from 'clsx';
-import type { IPost } from '@/entities/Post';
+
+import { saveSortedPosts } from '@/app/providers/StoreProvider/config/actions';
+import { postsSelector } from '@/app/providers/StoreProvider/config/selectors';
+import { filterByLength } from '@/features/PostLengthFilter/lib/filterByLength';
+import { debounce } from '@/shared/lib/debounce/debounce';
+import { useAppSelector } from '@/shared/lib/hooks/useAppSelector';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 
 import cls from './PostLengthFilter.module.css';
-import { debounce } from '@/shared/lib/debounce/debounce.ts';
-import {
-  filterByLength
-} from '@/features/PostLengthFilter/lib/filterByLength.ts';
 
 type PostLengthFilterProps = {
   className?: string;
-  defaultList: IPost[];
-  filteredList: (filteredList: IPost[]) => void;
 }
 
 export const PostLengthFilter = React.memo(
   ({
-  className,
-  defaultList,
-  filteredList,
-  ...props
-}: PostLengthFilterProps) => {
-  const [value, setValue] = useState<string>('')
-  const primaryList = useRef(defaultList).current
+    className,
+    ...props
+  }: PostLengthFilterProps) => {
+    const dispatch = useAppDispatch();
+    const defaultList = useAppSelector(postsSelector);
+    const [value, setValue] = useState<string>('')
 
-  useEffect(() => {
-    const debouncedFilter = debounce((value: string) => {
-      const newList = filterByLength({primaryList, value});
-      value && filteredList(newList);
-    }, 1000);
+    useEffect(() => {
+      const debouncedFilter = debounce((value: string) => {
+        const newList = filterByLength({defaultList, value});
+        dispatch(saveSortedPosts(newList));
+      }, 1000);
 
-    debouncedFilter(value);
+      debouncedFilter(value);
 
-    return () => {
-      debouncedFilter.cancel?.();
+      return () => {
+        debouncedFilter.cancel?.();
+      };
+    }, [value, dispatch, defaultList]);
+
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.value)
     };
-  }, [value]);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value)
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    if (event.key === 'Enter') {
-      setValue((event.target as HTMLInputElement).value)
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>
+    ) => {
+      if (event.key === 'Enter') {
+        setValue((event.target as HTMLInputElement).value)
+      }
     }
-  }
 
-  return (
-    <label>
-      <input
-        className={clsx(cls.input, className)}
-        type="text"
-        value={value}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        placeholder="Поиск"
-        {...props}
-      />
-    </label>
-  );
-});
+    return (
+      <label>
+        <input
+          className={clsx(cls.input, className)}
+          type="text"
+          value={value}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          placeholder="Поиск"
+          {...props}
+        />
+      </label>
+    );
+  });

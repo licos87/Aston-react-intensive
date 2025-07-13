@@ -8,7 +8,13 @@ type sortedProps = {
 export const sortByLength = ({
   defaultList,
   sortOrder
-}: sortedProps):IPost[] => [...defaultList].sort((a, b) => {
-  const diff = a.title.length - b.title.length;
-  return sortOrder === 'maxLength' ? -diff : diff;
-});
+}: sortedProps): IPost[] => {
+  if (sortOrder === 'default') {
+    return defaultList;
+  }
+
+  return [...defaultList].sort((a, b) => {
+    const diff = a.title.length - b.title.length;
+    return sortOrder === 'maxLength' ? -diff : diff;
+  });
+}
