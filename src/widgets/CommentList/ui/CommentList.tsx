@@ -1,66 +1,42 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
-import clsx from 'clsx';
-import { sortComments } from '@/widgets/CommentList/lib/sortComments.ts';
-import { randomList } from '@/widgets/CommentList/lib/randomLengthList.ts';
-import { Comment } from '@/entities/Comment';
-import type { CommentType } from '@/entities/Comment/model/types/CommentType.ts';
+import { useEffect, useState } from 'react';
+import { Comment, type CommentType, useGetCommentListQuery } from '@/entities/comment';
 import { Button } from '@/shared/ui/Button';
 
 import cls from './CommentList.module.css'
+import { useParams } from 'react-router-dom';
 
 type CommentListProps = {
   className?: string
-  commentList: CommentType[];
 };
 
-export const CommentList = ({className, commentList}: CommentListProps) => {
-  const [showAll, setShowAll] = useState(false);
-  const subList = useRef<HTMLUListElement>(null);
-  const randomComments = useMemo(() => {
-    const randomComments = randomList(commentList)
-    return sortComments(randomComments);
-  }, [commentList]);
+export const CommentList = ({className}: CommentListProps) => {
+  const {postId} = useParams()
+  const [pageNumber, setPageNumber] = useState(1);
 
-  const [firstComment, coverComments] = useMemo(() => {
-    const [first, ...rest] = randomComments;
-    return [first, rest];
-  }, [randomComments]);
+  const commentList = useGetCommentListQuery(Number(postId)).data;
+  const [comments, setComments] = useState<CommentType[]>([]);
 
-  const handleShowComments = useCallback(() => {
-    setShowAll(true);
-  }, []);
+  useEffect(() => {
+    if(commentList) {
+      setComments(commentList.slice(1, pageNumber * 5))
+    }
+  }, [commentList, pageNumber]);
 
-  const handleCoverComments = useCallback(() => {
-    setShowAll(false);
-  }, []);
+  const handleShowComments = () => setPageNumber( pageNumber + 1)
+
+
+
+  if (!commentList) {
+    return
+  }
 
 
   return (
     <div className={className}>
       <h3>Комментарии</h3>
       <ul className={cls.list}>
-        <li key={firstComment.id}><Comment comment={firstComment} /></li>
-        {
-          !showAll && (
-            <li>
-              <Button variant="contained" size="s" onClick={handleShowComments}>Показать больше комментариев</Button>
-            </li>
-          )
-        }
-        {
-          showAll && (
-            <li>
-              <ul className={clsx(cls.list, cls.subList)} ref={subList}>
-                {coverComments?.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)}
-              </ul>
-            </li>
-          )
-        }
-        {(showAll &&
-          <li>
-            <Button variant="contained" size="s" onClick={handleCoverComments}>Показать меньше комментариев</Button>
-          </li>
-        )}
+        {comments?.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)}
+        <li><Button variant='contained' size='m' onClick={handleShowComments}>Показать ещё</Button></li>
       </ul>
     </div>
   );
