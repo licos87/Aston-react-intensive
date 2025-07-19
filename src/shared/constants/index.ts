@@ -1,5 +1,4 @@
-import { COMPANY_URL } from './company';
-import { STUDENT } from './student';
-import { TEACHERS } from './teachers';
-
-export { COMPANY_URL, STUDENT, TEACHERS }
+export { COMPANY_URL } from './company';
+export { STUDENT } from './student';
+export { TEACHERS } from './teachers';
+export { RoutePath } from './routes.ts';
