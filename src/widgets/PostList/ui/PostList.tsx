@@ -1,14 +1,39 @@
-import { PostLengthSelect } from '@/features/PostLengthSorted';
+import { useEffect } from 'react';
 
-import { sortedPostsSelector } from '@/app/providers/StoreProvider/config/selectors';
-import { PostLengthFilter } from '@/features/PostLengthFilter/ui/PostLengthFilter';
-import { PostCard } from '@/entities/Post';
-import { useAppSelector } from '@/shared/lib/hooks/useAppSelector.ts';
+import { PostLengthSelect } from '@/features/postLengthSorted';
+import { PostLengthFilter } from '@/features/postLengthFilter';
+import {
+  getSortedPostListSelector,
+  PostCard,
+  setPostList,
+  useGetPostListQuery
+} from '@/entities/post';
+import { setUserList, useGetUserListQuery } from '@/entities/user';
+import { useAppSelector, useAppDispatch } from '@/app/providers/storeProvider/hooks';
+
 import cls from './PostList.module.css'
 
 export const PostList = () => {
+  const dispatch = useAppDispatch();
+  const {data: postList} = useGetPostListQuery();
 
-  const sortedList = useAppSelector(sortedPostsSelector);
+  const sortedList = useAppSelector(getSortedPostListSelector)
+  const {data: users} = useGetUserListQuery();
+
+  useEffect(() => {
+    if (postList) {
+      dispatch(setPostList(postList));
+    }
+    if (users) {
+      dispatch(setUserList(users));
+    }
+  }, [dispatch, postList, users]);
+
+  if(!users || !postList) {
+    return;
+  }
+
+  const resultList = sortedList ?? postList;
 
   return (
     <>
@@ -22,15 +47,14 @@ export const PostList = () => {
       </div>
       <ul className={cls.list}>
         {
-          sortedList.map(post =>
+          sortedList && resultList.map(post =>
             <li className={cls.item} key={post.id}
             >
               <PostCard
                 postId={post.id}
                 title={post.title}
-                text={post.text}
-                authorAvatar={post.author.avatar}
-                author={post.author.name}
+                text={post.body}
+                userId={post.userId}
               />
             </li>
           )

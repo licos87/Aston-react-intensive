@@ -27,9 +27,12 @@ const Select = ({
   }
 
   return (
-    <select className={clsx(cls.select, className)}
-            value={selected}
-            onChange={handleChange} {...props}>
+    <select
+      className={clsx(cls.select, className)}
+      value={selected}
+      onChange={handleChange}
+      {...props}
+    >
       {
         options.map(option => (
           <option value={option.value}

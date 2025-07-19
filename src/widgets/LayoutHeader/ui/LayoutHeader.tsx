@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { ThemeSwitcher } from '@/features/ThemeSwitcher';
+import { ThemeSwitcher } from '@/features/themeSwitcher';
 import { CompanyLogo } from '@/shared/ui/CompanyLogo';
 import { COMPANY_URL } from '@/shared/constants';
 import { LogoAston } from '@/shared/assets';
