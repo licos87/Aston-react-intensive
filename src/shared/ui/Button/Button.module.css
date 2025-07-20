@@ -1,4 +1,6 @@
 .button {
+  cursor: pointer;
+
   display: inline-block;
 
   width: fit-content;
@@ -6,10 +8,20 @@
   border-radius: 5px;
 
   color: var(--font-color);
+
+  transition: var(--trans-default);
+
+  &:hover,
+  &:focus {
+    color: color-mix(in oklab, var(--font-color) 90%, var(--hover-color));
+    background-color: color-mix(in oklab, var(--bg-color) 85%, var(--hover-color));
+  }
 }
 
 .outlined {
-  background-color: inherit;
+  border: transparent;
+  background-color: transparent;
+  outline: none;
 }
 
 .contained {

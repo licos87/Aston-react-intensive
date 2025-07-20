@@ -1,0 +1,27 @@
+.comment {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+}
+
+.title {
+  margin: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.text {
+  margin: 0;
+  line-height: 1;
+}
+
+.email {
+  font-size: 0.8em;
+  font-style: italic;
+}
+
