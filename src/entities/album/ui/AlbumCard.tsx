@@ -20,12 +20,17 @@ export const AlbumCard = ({title, albumId}: AlbumCardProps) => {
     }
   }, [photoList, pageNumber]);
 
-  const handleShowComments = () => setPageNumber(pageNumber + 1)
+  const handleShowPhoto = () => setPageNumber(pageNumber + 1)
 
   const toggleOpenedAlbum = () => {
     setIsOpen(!isOpen);
   }
-  const status = !isOpen ? 'none' : 'unset'
+  const status = !isOpen ? 'none' : 'flex'
+
+  const onChangeURL = (photo: string) => photo.replace(
+    /(https:\/\/via\.placeholder\.com)(\/(\d+)\/([^/]+))/,
+    'https://placehold.co$2/FFF'
+  )
 
   return (
     <div>
@@ -33,11 +38,11 @@ export const AlbumCard = ({title, albumId}: AlbumCardProps) => {
         {capitalizeFirstLetter(title)}
       </p>
       <span style={{display: status}}>Список превью фотографий</span>
-      <ul style={{display: status, padding: 0}}>
+      <ul style={{display: status, padding: 0, flexWrap: 'wrap', gap: 10}}>
         {
           photos?.map(photo =>
-            <li style={{border: '1px solid grey', marginBlock: 10}} key={photo.id}>
-              <img src={photo.thumbnailUrl}
+            <li style={{border: '1px solid grey', marginBlock: '10px', display: 'contents'}} key={photo.id}>
+              <img src={onChangeURL(photo.thumbnailUrl)}
                    alt={capitalizeFirstLetter(photo.title)}
                    width={150}
                    height={150}
@@ -46,11 +51,13 @@ export const AlbumCard = ({title, albumId}: AlbumCardProps) => {
             </li>
           )
         }
-        <li style={{listStyleType: 'none', marginBlock: '5px'}}><Button variant="outlined"
-                                                                        size="s"
-                                                                        onClick={handleShowComments}
-        >Показать ещё</Button></li>
       </ul>
+      <Button
+        variant="outlined"
+        size="s"
+        onClick={handleShowPhoto}
+        style={{display: status, marginBlock: 10}}
+      >Показать ещё</Button>
     </div>
   );
 };
