@@ -1,54 +1,42 @@
-import { useEffect, useState } from 'react';
-import { type IPost, PostCard } from '@/entities/post';
-import { Button } from '@/shared/ui/Button';
+import { PostLengthSelect } from '@/features/PostLengthSorted';
 
-import { fetchPosts } from '../api/fetchPosts.ts';
+import { sortedPostsSelector } from '@/app/providers/StoreProvider/config/selectors';
+import { PostLengthFilter } from '@/features/PostLengthFilter/ui/PostLengthFilter';
+import { PostCard } from '@/entities/Post';
+import { useAppSelector } from '@/shared/lib/hooks/useAppSelector.ts';
 import cls from './PostList.module.css'
-import { Modal } from '@/shared/ui/Modal';
 
 export const PostList = () => {
-  const [postList, setPostList] = useState<IPost[]>([])
-  const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    try {
-      const postsData = fetchPosts()
-      setPostList(postsData)
-    } catch (err) {
-      console.log(err)
-    }
-  }, [])
-
-  const handleModalToggle = () => setIsOpen(!isOpen);
+  const sortedList = useAppSelector(sortedPostsSelector);
 
   return (
     <>
-      <Button
-        className={cls.infoBtn}
-        variant="contained"
-        size="m"
-        onClick={handleModalToggle}
-      >О проекте</Button>
-      {isOpen && <Modal onClose={handleModalToggle}>
-        <p>Дополнительный контент</p>
-      </Modal>}
+      <div className={cls.controls}>
+        <PostLengthFilter
+          className={cls.selectControl}
+        />
+        <PostLengthSelect
+          className={cls.selectControl}
+        />
+      </div>
       <ul className={cls.list}>
         {
-          postList.map(post => (
-            <li
-              className={cls.item}
-              key={post.id}
+          sortedList.map(post =>
+            <li className={cls.item} key={post.id}
             >
               <PostCard
+                postId={post.id}
                 title={post.title}
-                imgUrl={post.imgUrl}
-                imgAlt={post.imgAlt}
                 text={post.text}
+                authorAvatar={post.author.avatar}
+                author={post.author.name}
               />
             </li>
-          ))
+          )
         }
       </ul>
     </>
+
   )
 }

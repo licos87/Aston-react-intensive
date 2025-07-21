@@ -1,0 +1,27 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.authorBlock {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  align-self: end
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.comments {
+  align-self: start;
+}

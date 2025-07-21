@@ -1,10 +1,11 @@
 import { createPortal } from 'react-dom'
-import React, { type ReactNode, useEffect } from 'react';
+import React, { type ReactNode, useContext, useEffect } from 'react';
 import clsx from 'clsx';
-import { Button } from '@/shared/ui/Button';
-import CloseIcon from '@/shared/assets/close.svg'
 
 import cls from './Modal.module.css'
+import { ModalContext } from './ModalContext';
+import { Button } from '@/shared/ui/Button';
+import CloseIcon from '@/shared/assets/close.svg';
 
 type ModalProps = {
   children?: ReactNode;
@@ -12,9 +13,8 @@ type ModalProps = {
   onClose: () => void;
 }
 
-export const Modal = ({children, className, onClose}: ModalProps) => {
+const Modal = ({children, className, onClose}: ModalProps) => {
   const modalRoot = document.getElementById('modal-root');
-  if (!modalRoot) return null;
 
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
@@ -31,6 +31,10 @@ export const Modal = ({children, className, onClose}: ModalProps) => {
     }
   }, [onClose]);
 
+  if(!modalRoot) {
+    return null;
+  }
+
   const handleOverlayClick = () => {
     onClose();
   };
@@ -40,35 +44,59 @@ export const Modal = ({children, className, onClose}: ModalProps) => {
   };
 
   return createPortal(
-    <div className={cls.overlay} onClick={handleOverlayClick}>
-      <div className={clsx(cls.modal, className)} onClick={handleContentClick}>
-        <div className={cls.modalTop}>
-          <h4 className={cls.title}>О проекте</h4>
-          <Button className={cls.closeBtn}
-                  variant="outlined"
-                  size="s"
-                  onClick={onClose}
-                  title="Закрыть"
-          >
-            <img src={CloseIcon}
-                 width={30}
-                 height={30}
-                 alt="Закрыть"
-            />
-          </Button>
-        </div>
-        <div className={cls.body}>
-          <p className={cls.text}>
-            Проект создан для глубокого освоения современного стека разработки на React. Мы используем Vite для
-            сверхбыстрой сборки и TypeScript для строгой типизации, реализуя архитектуру Feature-Sliced Design (FSD) для
-            масштабируемости. Динамическое управление классами компонентов обеспечивается библиотекой clsx, а качество
-            кода контролируется ESLint и Stylelint. Интеграция этих инструментов создаёт отлаженный workflow с
-            автоматическими проверками. Этот стек служит эталонным шаблоном для production-приложений.
-          </p>
+    <ModalContext.Provider value={{ onClose }}>
+      <div className={cls.overlay} onClick={handleOverlayClick}>
+        <div className={clsx(cls.modal, className)} onClick={handleContentClick}>
           {children}
         </div>
       </div>
-    </div>,
+    </ModalContext.Provider>,
     modalRoot
   )
 }
+
+// Компоненты
+
+Modal.Header = function ModalHeader ({children}: {children: string}) {
+  const context = useContext(ModalContext);
+
+  return (
+    <div className={cls.modalTop}>
+      <h4 className={cls.title}>{children}</h4>
+      <Button className={cls.closeBtn}
+              variant="outlined"
+              size="s"
+              onClick={context?.onClose}
+              title="Закрыть"
+      >
+        <img src={CloseIcon}
+             width={30}
+             height={30}
+             alt="Закрыть"
+        />
+      </Button>
+    </div>
+  );
+}
+
+Modal.Body = function ModalBody ({children}: {children: string}){
+  return (
+    <div className={cls.body}>
+      <p className={cls.text}>
+        {children}
+      </p>
+    </div>
+  );
+};
+
+Modal.Footer = function ModalFooter ({children}: {children: string}){
+  return (
+    <div className={cls.footer}>
+      <p className={cls.text}>
+        {children}
+      </p>
+    </div>
+  );
+};
+
+export {Modal};

@@ -1,0 +1,53 @@
+.UserInfo {
+  border: 1px solid var(--border-color);
+
+  @media (width >= 768px) {
+    display: flex;
+    gap: 20px;
+    height: 100%;
+  }
+}
+
+.navbar {
+  padding: 20px;
+  border-right: 1px solid var(--border-color);
+}
+
+.userName {
+  width: 200px;
+  margin: 0;
+  margin-block-end: 20px;
+  margin-inline: auto;
+
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 10px;
+
+  list-style-type: auto;
+
+  @media (width >= 768px) {
+    flex-direction: column;
+  }
+}
+
+.active {
+  border-bottom: 1px solid #535bf2;
+}
+
+.linkToHome {
+  position: absolute;
+  bottom: 50px;
+  left: 80px;
+}
+
+.content {
+  padding: 20px;
+}
