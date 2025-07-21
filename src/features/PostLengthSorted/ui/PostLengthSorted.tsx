@@ -34,7 +34,7 @@ export const PostLengthSelect = React.memo(
       const sorted = sortByLength({defaultList, sortOrder})
       sortedList(sorted);
     }
-  }, [sortOrder]);
+  }, [sortOrder, defaultList, sortedList]);
 
   const handleSelect = (sortValue: string) => {
     setSortOrder(sortValue);

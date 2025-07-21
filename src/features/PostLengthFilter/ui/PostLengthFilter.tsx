@@ -32,7 +32,7 @@ export const PostLengthFilter = React.memo(
   useEffect(() => {
     const debouncedFilter = debounce((value: string) => {
       const newList = filterByLength({primaryList, value});
-      value && filteredList(newList);
+      filteredList(newList);
     }, 1000);
 
     debouncedFilter(value);
@@ -40,7 +40,7 @@ export const PostLengthFilter = React.memo(
     return () => {
       debouncedFilter.cancel?.();
     };
-  }, [value]);
+  }, [filteredList, primaryList, value]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)

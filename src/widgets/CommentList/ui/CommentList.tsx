@@ -35,29 +35,26 @@ export const CommentList = ({commentList}: CommentListProps) => {
 
 
   return (
-    <ul className={cls.list}>
-      <li key={firstComment.id}><Comment comment={firstComment} /></li>
+    <>
+      <Comment comment={firstComment} />
       {
         !showAll && (
-          <li>
-            <Button variant="contained" size="s" onClick={handleShowComments}>Показать больше комментариев</Button>
-          </li>
+
+          <Button variant="contained" size="s" onClick={handleShowComments}>Показать больше комментариев</Button>
+
         )
       }
       {
         showAll && (
-          <li>
             <ul className={clsx(cls.list, cls.subList)} ref={subList}>
               {coverComments?.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)}
             </ul>
-          </li>
         )
       }
       {(showAll &&
-        <li>
           <Button variant="contained" size="s" onClick={handleCoverComments}>Показать меньше комментариев</Button>
-        </li>
       )}
-    </ul>
-  );
+    </>
+  )
+  ;
 };
