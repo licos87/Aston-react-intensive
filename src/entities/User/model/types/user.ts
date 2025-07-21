@@ -3,6 +3,13 @@ export interface User {
   name: string;
   avatar: string;
   posts: number[];
-  albums: number[];
-  todos: number[];
+  albums: {
+    id: number;
+    title: string;
+    photo: {
+      id: number;
+      url: string;
+    }[];
+  }[];
+  todos: string[];
 }

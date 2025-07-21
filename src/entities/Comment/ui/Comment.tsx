@@ -2,12 +2,13 @@ import type { CommentType } from '../model/types/CommentType.ts';
 import { formatDate } from '@/shared/lib/formatDate/formatDate.ts';
 
 import cls from './Comment.module.css';
+import { memo } from 'react';
 
 interface CommentProps {
   comment: CommentType;
 }
 
-export const Comment = ({comment}: CommentProps) => {
+export const Comment = memo(({comment}: CommentProps) => {
   const date = formatDate(comment.date);
 
   return (
@@ -20,4 +21,4 @@ export const Comment = ({comment}: CommentProps) => {
       </div>
     </div>
   );
-};
+});

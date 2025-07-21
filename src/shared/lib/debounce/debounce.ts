@@ -1,5 +1,5 @@
 
-export function debounce<T extends (...args: any[]) => void>(
+export function debounce<T extends (...args: string[]) => void>(
   func: T,
   delay: number
 ): {

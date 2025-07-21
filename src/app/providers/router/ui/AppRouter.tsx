@@ -5,10 +5,10 @@ import { RoutePath } from '@/shared/constants';
 import { MainLayout } from '@/shared/layouts';
 import { MainPage } from '@/pages/MainPage';
 import { PostPage } from '@/pages/PostPage';
-import { AlbumsPage } from '@/pages/UserPage/ui/AlbumsPage';
+import { UserAlbumsPage } from '@/pages/UserPage/ui/UserAlbumsPage';
 import { UserPage } from '@/pages/UserPage';
-import { PostsPage } from '@/pages/UserPage/ui/PostsPage';
-import { TodosPage } from '@/pages/UserPage/ui/TodosPage';
+import { PostsPage } from '@/pages/UserPage/ui/UserPostsPage';
+import { TodosPage } from '@/pages/UserPage/ui/UserTodosPage';
 
 export const AppRouter = () => {
 
@@ -19,7 +19,7 @@ export const AppRouter = () => {
           <Route index element={<MainPage />} />
           <Route path={RoutePath.POST} element={<PostPage />} />
           <Route path={RoutePath.USER} element={<UserPage />}>
-            <Route path={RoutePath.ALBUMS} element={<AlbumsPage />} />
+            <Route path={RoutePath.ALBUMS} element={<UserAlbumsPage />} />
             <Route path={RoutePath.POSTS} element={<PostsPage />} />
             <Route path={RoutePath.TODOS} element={<TodosPage />} />
           </Route>
