@@ -20,12 +20,10 @@ export const PostList = ({data}: PostListProps) => {
     <>
       <div className={cls.controls}>
         <PostLengthFilter
-          className={cls.selectControl}
           defaultList={list}
           filteredList={handleChangeList}
         />
         <PostLengthSelect
-          className={cls.selectControl}
           defaultList={list}
           sortedList={handleChangeList}
         />

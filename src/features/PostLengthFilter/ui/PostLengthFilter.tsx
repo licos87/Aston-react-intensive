@@ -14,14 +14,12 @@ import {
 } from '@/features/PostLengthFilter/lib/filterByLength.ts';
 
 type PostLengthFilterProps = {
-  className?: string;
   defaultList: IPost[];
   filteredList: (filteredList: IPost[]) => void;
 }
 
 export const PostLengthFilter = React.memo(
   ({
-  className,
   defaultList,
   filteredList,
   ...props
@@ -56,7 +54,7 @@ export const PostLengthFilter = React.memo(
   return (
     <label>
       <input
-        className={clsx(cls.input, className)}
+        className={clsx(cls.input, cls.selectControl)}
         type="text"
         value={value}
         onChange={handleChange}

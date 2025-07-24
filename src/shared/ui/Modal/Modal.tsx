@@ -1,11 +1,12 @@
 import { createPortal } from 'react-dom'
-import React, { type ReactNode, useContext, useEffect } from 'react';
+import React, { type ReactNode, useEffect } from 'react';
 import clsx from 'clsx';
 
 import cls from './Modal.module.css'
 import { ModalContext } from './ModalContext';
-import { Button } from '@/shared/ui/Button';
-import CloseIcon from '@/shared/assets/close.svg';
+import { ModalFooter } from '@/shared/ui/Modal/components/ModalFooter.tsx';
+import { ModalBody } from '@/shared/ui/Modal/components/ModalBody.tsx';
+import { ModalHeader } from '@/shared/ui/Modal/components/ModalHeader.tsx';
 
 type ModalProps = {
   children?: ReactNode;
@@ -56,47 +57,8 @@ const Modal = ({children, className, onClose}: ModalProps) => {
 }
 
 // Компоненты
-
-Modal.Header = function ModalHeader ({children}: {children: string}) {
-  const context = useContext(ModalContext);
-
-  return (
-    <div className={cls.modalTop}>
-      <h4 className={cls.title}>{children}</h4>
-      <Button className={cls.closeBtn}
-              variant="outlined"
-              size="s"
-              onClick={context?.onClose}
-              title="Закрыть"
-      >
-        <img src={CloseIcon}
-             width={30}
-             height={30}
-             alt="Закрыть"
-        />
-      </Button>
-    </div>
-  );
-}
-
-Modal.Body = function ModalBody ({children}: {children: string}){
-  return (
-    <div className={cls.body}>
-      <p className={cls.text}>
-        {children}
-      </p>
-    </div>
-  );
-};
-
-Modal.Footer = function ModalFooter ({children}: {children: string}){
-  return (
-    <div className={cls.footer}>
-      <p className={cls.text}>
-        {children}
-      </p>
-    </div>
-  );
-};
+Modal.Header = ModalHeader;
+Modal.Body = ModalBody;
+Modal.Footer = ModalFooter;
 
 export {Modal};

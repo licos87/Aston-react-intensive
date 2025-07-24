@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Select } from '@/shared/ui/Select';
 import type { IPost } from '@/entities/Post';
 import { sortByLength } from '@/features/PostLengthSorted/lib/sortByLength.ts';
+
+import cls from './PostLengthSorted.module.css';
 
 const OPTIONS = [
   {
@@ -29,20 +31,15 @@ export const PostLengthSelect = React.memo(
 }: PostLengthFilterProps) => {
   const [sortOrder, setSortOrder] = useState<string>('')
 
-  useEffect(() => {
-    if (sortOrder) {
-      const sorted = sortByLength({defaultList, sortOrder})
-      sortedList(sorted);
-    }
-  }, [sortOrder, defaultList, sortedList]);
-
   const handleSelect = (sortValue: string) => {
     setSortOrder(sortValue);
+    const sorted = sortByLength({defaultList, sortValue})
+    sortedList(sorted);
   };
 
 
   return (
-    <Select className={className}
+    <Select className={cls.selectControl}
             options={OPTIONS}
             selected={sortOrder}
             onSelected={handleSelect}

@@ -2,13 +2,13 @@ import type { IPost } from '@/entities/Post';
 
 type sortedProps = {
   defaultList: IPost[];
-  sortOrder: string;
+  sortValue: string;
 }
 
 export const sortByLength = ({
   defaultList,
-  sortOrder
+                               sortValue
 }: sortedProps):IPost[] => [...defaultList].sort((a, b) => {
   const diff = a.title.length - b.title.length;
-  return sortOrder === 'maxLength' ? -diff : diff;
+  return sortValue === 'maxLength' ? -diff : diff;
 });
