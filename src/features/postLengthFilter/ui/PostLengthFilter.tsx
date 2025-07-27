@@ -8,15 +8,7 @@ import { useAppSelector, useAppDispatch } from '@/app/providers/storeProvider/ho
 import { filterByLength } from '../lib/filterByLength';
 import cls from './PostLengthFilter.module.css';
 
-type PostLengthFilterProps = {
-  className?: string;
-}
-
-export const PostLengthFilter = React.memo(
-  ({
-     className,
-     ...props
-   }: PostLengthFilterProps) => {
+export const PostLengthFilter = React.memo(() => {
     const dispatch = useAppDispatch();
     const defaultList = useAppSelector(getPostListSelector);
     const [value, setValue] = useState<string>('')
@@ -47,13 +39,12 @@ export const PostLengthFilter = React.memo(
     return (
       <label>
         <input
-          className={clsx(cls.input, className)}
+          className={clsx(cls.input, cls.selectControl)}
           type="text"
           value={value}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           placeholder="Поиск"
-          {...props}
         />
       </label>
     );

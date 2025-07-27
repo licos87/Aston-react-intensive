@@ -1,11 +1,11 @@
 import { Button } from '@/shared/ui/Button';
 import CloseIcon from '@/shared/assets/close.svg';
 import cls from '../Modal.module.css';
-import { useContext } from 'react';
+import { type ReactNode, useContext } from 'react';
 import { ModalContext } from '@/shared/ui/Modal/ModalContext.tsx';
 
 type ModalHeaderProps = {
-  children: string;
+  children: ReactNode;
 };
 
 export const ModalHeader = ({children}: ModalHeaderProps) => {
