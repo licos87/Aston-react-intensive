@@ -7,8 +7,12 @@ export const photoApi = baseApi.injectEndpoints({
       query: (albumId) =>
         `photos?albumId=${albumId}`,
     }),
+    getPhoto: builder.query<PhotoType, number>({
+      query: (photoId) =>
+        `photos/${photoId}`,
+    }),
   }),
   overrideExisting: false
 })
 
-export const {useGetPhotoListQuery} = photoApi;
+export const {useGetPhotoListQuery, useGetPhotoQuery} = photoApi;

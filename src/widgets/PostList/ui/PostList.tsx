@@ -38,12 +38,8 @@ export const PostList = () => {
   return (
     <>
       <div className={cls.controls}>
-        <PostLengthFilter
-          className={cls.selectControl}
-        />
-        <PostLengthSelect
-          className={cls.selectControl}
-        />
+        <PostLengthFilter />
+        <PostLengthSelect />
       </div>
       <ul className={cls.list}>
         {

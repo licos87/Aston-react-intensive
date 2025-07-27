@@ -1,7 +1,8 @@
 import cls from '@/shared/ui/Modal/Modal.module.css';
+import type { ReactNode } from 'react';
 
 type ModalFooterProps = {
-  children: string;
+  children: ReactNode;
 };
 
 export const ModalFooter = ({children}: ModalFooterProps) => {

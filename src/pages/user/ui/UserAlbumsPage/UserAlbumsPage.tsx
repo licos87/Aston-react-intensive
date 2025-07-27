@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { useGetUserAlbumListQuery, AlbumCard } from '@/entities/album';
 
 export const UserAlbumsPage = () => {
@@ -16,6 +16,7 @@ export const UserAlbumsPage = () => {
           </li>
         ))}
       </ul>
+      <Outlet/>
     </>
   )
     ;
