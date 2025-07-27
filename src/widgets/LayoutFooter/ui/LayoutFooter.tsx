@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
-import { CompanyLogo } from "@/shared/ui/CompanyLogo";
-import { COMPANY_URL, TEACHERS } from "@/shared/constants";
+import type { ReactNode } from 'react';
+import { CompanyLogo } from '@/shared/ui/CompanyLogo';
+import { COMPANY_URL, TEACHERS } from '@/shared/constants';
 import { LogoAston } from '@/shared/assets';
 
 import cls from './LayoutFooter.module.css'
@@ -12,7 +12,7 @@ interface LayoutFooterProps {
 export const LayoutFooter = ({children}: LayoutFooterProps) => {
   return (
     <footer className={cls.footer}>
-      <CompanyLogo companyUrl={COMPANY_URL} imgUrl={LogoAston}/>
+      <CompanyLogo companyUrl={COMPANY_URL} imgUrl={LogoAston} />
       {children}
       <ul className={cls.teachersList}>
         {
