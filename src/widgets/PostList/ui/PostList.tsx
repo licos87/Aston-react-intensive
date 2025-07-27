@@ -1,54 +1,62 @@
-import { useEffect, useState } from 'react';
-import { type IPost, PostCard } from '@/entities/post';
-import { Button } from '@/shared/ui/Button';
+import { useEffect } from 'react';
 
-import { fetchPosts } from '../api/fetchPosts.ts';
+import { PostLengthSelect } from '@/features/postLengthSorted';
+import { PostLengthFilter } from '@/features/postLengthFilter';
+import {
+  getSortedPostListSelector,
+  PostCard,
+  setPostList,
+  useGetPostListQuery
+} from '@/entities/post';
+import { setUserList, useGetUserListQuery } from '@/entities/user';
+import { useAppSelector, useAppDispatch } from '@/app/providers/storeProvider/hooks';
+
 import cls from './PostList.module.css'
-import { Modal } from '@/shared/ui/Modal';
 
 export const PostList = () => {
-  const [postList, setPostList] = useState<IPost[]>([])
-  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const {data: postList} = useGetPostListQuery();
+
+  const sortedList = useAppSelector(getSortedPostListSelector)
+  const {data: users} = useGetUserListQuery();
 
   useEffect(() => {
-    try {
-      const postsData = fetchPosts()
-      setPostList(postsData)
-    } catch (err) {
-      console.log(err)
+    if (postList) {
+      dispatch(setPostList(postList));
     }
-  }, [])
+    if (users) {
+      dispatch(setUserList(users));
+    }
+  }, [dispatch, postList, users]);
 
-  const handleModalToggle = () => setIsOpen(!isOpen);
+  if(!users || !postList) {
+    return;
+  }
+
+  const resultList = sortedList ?? postList;
 
   return (
     <>
-      <Button
-        className={cls.infoBtn}
-        variant="contained"
-        size="m"
-        onClick={handleModalToggle}
-      >О проекте</Button>
-      {isOpen && <Modal onClose={handleModalToggle}>
-        <p>Дополнительный контент</p>
-      </Modal>}
+      <div className={cls.controls}>
+        <PostLengthFilter />
+        <PostLengthSelect />
+      </div>
       <ul className={cls.list}>
         {
-          postList.map(post => (
-            <li
-              className={cls.item}
-              key={post.id}
+          sortedList && resultList.map(post =>
+            <li className={cls.item} key={post.id}
             >
               <PostCard
+                postId={post.id}
                 title={post.title}
-                imgUrl={post.imgUrl}
-                imgAlt={post.imgAlt}
-                text={post.text}
+                text={post.body}
+                userId={post.userId}
               />
             </li>
-          ))
+          )
         }
       </ul>
     </>
+
   )
 }
