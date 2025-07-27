@@ -1,30 +1,31 @@
+import { NavLink } from 'react-router-dom';
+
+import { RoutePath } from '@/shared/constants';
+
 import cls from './PostCard.module.css'
-import { CommentList } from '@/widgets/CommentList';
-import { COMMENTS } from '@/widgets/CommentList/mock/comments.ts';
+import { User } from '@/entities/User';
 
 interface PostCardProps {
+  postId: string;
   title: string;
-  imgUrl: string;
-  imgAlt: string;
   text: string;
+  authorAvatar: string;
+  author: string
 }
 
-export const PostCard = ({title, imgUrl, imgAlt, text}: PostCardProps) => {
+export const PostCard = ({postId, title, text, authorAvatar, author}: PostCardProps) => {
 
   return (
-    <div className={cls.card}>
-      <div className={cls.cardTop}>
-        <h3 className={cls.title}>{title}</h3>
+    <NavLink to={RoutePath.POST.replace(':postId', postId)}>
+      <div className={cls.card}>
+        <div className={cls.cardTop}>
+          <h3 className={cls.title}>{title}</h3>
+        </div>
+        <div className={cls.body}>
+          <p className={cls.text}>{text}</p>
+          <User userAvatar={authorAvatar} userName={author}/>
+        </div>
       </div>
-      <div className={cls.body}>
-        <img
-          className={cls.img}
-          src={imgUrl}
-          alt={imgAlt}
-        />
-        <p className={cls.text}>{text}</p>
-      </div>
-      <CommentList commentList={COMMENTS}/>
-    </div>
+    </NavLink>
   )
 }

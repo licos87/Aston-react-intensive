@@ -2,4 +2,4 @@
 - React Portal
 - Context API
 - React Router
-- 
+- Redux-thunk

@@ -1,3 +1,1 @@
-import { PostLengthSelect } from './ui/PostLengthFilter.tsx';
-
-export { PostLengthSelect };
+export { PostLengthFilter } from './ui/PostLengthFilter.tsx';

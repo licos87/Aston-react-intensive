@@ -1,16 +1,16 @@
 import type { IPost } from '@/entities/Post';
 
 type filterByLengthProps = {
-  primaryList: IPost[];
+  defaultList: IPost[];
   value: string;
 }
 
 export const filterByLength = ({
-  primaryList,
+  defaultList,
   value
 }: filterByLengthProps): IPost[] => {
-  let result = primaryList;
-  if(value) result = primaryList.filter(post => post.title.includes(value));
+  let result = defaultList;
+  if(value) result = defaultList.filter(post => post.title.includes(value));
 
   return result;
 }

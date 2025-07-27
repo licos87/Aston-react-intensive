@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Select } from '@/shared/ui/Select';
-import type { IPost } from '@/entities/Post';
 import { sortByLength } from '@/features/PostLengthSorted/lib/sortByLength.ts';
-
-import cls from './PostLengthSorted.module.css';
+import { useAppSelector } from '@/shared/lib/hooks/useAppSelector.ts';
+import { postsSelector } from '@/app/providers/StoreProvider/config/selectors.ts';
+import { saveSortedPosts } from '@/app/providers/StoreProvider/config/actions.ts';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch.ts';
 
 const OPTIONS = [
+  {
+    value: 'default',
+    label: 'По умолчанию'
+  },
   {
     value: 'minLength',
     label: 'Сначала короткие названия'
@@ -18,32 +23,33 @@ const OPTIONS = [
 
 type PostLengthFilterProps = {
   className?: string;
-  defaultList: IPost[];
-  sortedList: (sortedList: IPost[]) => void;
 }
 
 export const PostLengthSelect = React.memo(
   ({
-  className,
-  defaultList,
-  sortedList,
-  ...props
-}: PostLengthFilterProps) => {
-  const [sortOrder, setSortOrder] = useState<string>('')
+    className,
+    ...props
+  }: PostLengthFilterProps) => {
+    const defaultList = useAppSelector(postsSelector);
+    const dispatch = useAppDispatch();
+    const [sortOrder, setSortOrder] = useState<string>('default')
 
-  const handleSelect = (sortValue: string) => {
-    setSortOrder(sortValue);
-    const sorted = sortByLength({defaultList, sortValue})
-    sortedList(sorted);
-  };
+    useEffect(() => {
+        const newList = sortByLength({defaultList, sortOrder})
+        dispatch(saveSortedPosts(newList));
+    }, [defaultList, dispatch, sortOrder]);
+
+    const handleSelect = (sortValue: string) => {
+      setSortOrder(sortValue);
+    };
 
 
-  return (
-    <Select className={cls.selectControl}
-            options={OPTIONS}
-            selected={sortOrder}
-            onSelected={handleSelect}
-            {...props}
-    />
-  );
-});
+    return (
+      <Select className={className}
+              options={OPTIONS}
+              selected={sortOrder}
+              onSelected={handleSelect}
+              {...props}
+      />
+    );
+  });

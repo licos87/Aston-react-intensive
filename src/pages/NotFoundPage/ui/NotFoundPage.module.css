@@ -1,0 +1,50 @@
+.pageNotFoundContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--bg-color);
+}
+
+.pageNotFoundTitle {
+  margin: 10px;
+  font-size: 66px;
+  font-weight: 900;
+}
+
+.pageNotFoundText {
+  font-size: 24px;
+}
+
+.pageNotFoundTitle,
+.pageNotFoundText {
+  font-family: 'Source Sans 3', sans-serif;
+  color: #2597B9;
+}
+
+.imgContainer {
+  display: flex;
+  box-shadow: #f6f7fa 0 0 13px 18px;
+}
+
+.pageNotFoundBtn {
+  padding: 8px 32px;
+  border: none;
+  border-radius: 12px;
+
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 24px;
+  color: #FFF;
+
+  background-color: #2597B9;
+
+  transition: transform 0.4s ease;
+
+  &:hover {
+    transform: scale(1.02);
+    background-color: #269dc2;
+    box-shadow: 0 5px 10px 0 rgb(23 22 22 / 14%), 0 4px 9px 0 rgb(12 138 183 / 61%);
+    transition: scale 0.3s ease;
+  }
+}
