@@ -9,7 +9,7 @@ import { Button } from '@/shared/ui/Button';
 import cls from './CommentList.module.css'
 
 type CommentListProps = {
-  className?: string
+  className?: string;
   commentList: CommentType[];
 };
 
