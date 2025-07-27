@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { getPostListSelector, setSortedPostList } from '@/entities/post';
 import { Select } from '@/shared/ui/Select';
 import { useAppSelector, useAppDispatch } from '@/app/providers/storeProvider/hooks';
 import { sortByLength } from '../lib/sortByLength.ts';
+
+import cls from './PostLengthSorted.module.css'
 
 const OPTIONS = [
   {
@@ -20,35 +22,24 @@ const OPTIONS = [
   }
 ]
 
-type PostLengthFilterProps = {
-  className?: string;
-}
-
-export const PostLengthSelect = React.memo(
-  ({
-    className,
-    ...props
-  }: PostLengthFilterProps) => {
+export const PostLengthSelect = React.memo(() => {
     const defaultList = useAppSelector(getPostListSelector);
     const dispatch = useAppDispatch();
     const [sortOrder, setSortOrder] = useState<string>('default')
 
-    useEffect(() => {
-        const newList = sortByLength({defaultList, sortOrder})
-        dispatch(setSortedPostList(newList));
-    }, [defaultList, dispatch, sortOrder]);
-
     const handleSelect = (sortValue: string) => {
       setSortOrder(sortValue);
+      const newList = sortByLength({defaultList, sortValue})
+      dispatch(setSortedPostList(newList));
     };
 
 
     return (
-      <Select className={className}
-              options={OPTIONS}
-              selected={sortOrder}
-              onSelected={handleSelect}
-              {...props}
+      <Select
+        className={cls.selectControl}
+        options={OPTIONS}
+        selected={sortOrder}
+        onSelected={handleSelect}
       />
     );
   });
