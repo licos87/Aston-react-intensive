@@ -9,6 +9,7 @@ import { UserAlbumsPage } from '@/pages/user';
 import { UserPage } from '@/pages/user';
 import { UserPostsPage } from '@/pages/user';
 import { UserTodosPage } from '@/pages/user';
+import { Photo } from '@/entities/photo/ui/Photo.tsx';
 
 export const AppRouter = () => {
 
@@ -19,7 +20,9 @@ export const AppRouter = () => {
           <Route index element={<MainPage />} />
           <Route path={RoutePath.POST} element={<PostPage />} />
           <Route path={RoutePath.USER} element={<UserPage />}>
-            <Route path={RoutePath.ALBUMS} element={<UserAlbumsPage />} />
+            <Route path={RoutePath.ALBUMS} element={<UserAlbumsPage />} >
+              <Route path={RoutePath.PHOTO} element={<Photo />} />
+            </Route>
             <Route path={RoutePath.POSTS} element={<UserPostsPage />} />
             <Route path={RoutePath.TODOS} element={<UserTodosPage />} />
           </Route>

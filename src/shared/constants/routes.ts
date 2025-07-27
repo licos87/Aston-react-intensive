@@ -1,9 +1,10 @@
 export const RoutePath = {
   MAIN: '/',
   POST: '/post/:postId',
-  USER: '/:userId',
+  USER: '/user/:userId',
   POSTS: 'posts',
   ALBUMS: 'albums',
+  PHOTO: 'photo/:photoId',
   TODOS: 'todos',
   NOT_FOUND: '*',
 } as const;

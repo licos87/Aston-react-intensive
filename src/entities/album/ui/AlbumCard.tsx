@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { type PhotoType, useGetPhotoListQuery } from '@/entities/photo/@x/album';
 import { capitalizeFirstLetter } from '@/shared/lib/capitalizeFirstLetter';
 import { Button } from '@/shared/ui/Button';
+import { NavLink } from 'react-router-dom';
+import { RoutePath } from '@/shared/constants';
 
 type AlbumCardProps = {
   title: string;
@@ -42,12 +44,14 @@ export const AlbumCard = ({title, albumId}: AlbumCardProps) => {
         {
           photos?.map(photo =>
             <li style={{border: '1px solid grey', marginBlock: '10px', display: 'contents'}} key={photo.id}>
-              <img src={onChangeURL(photo.thumbnailUrl)}
-                   alt={capitalizeFirstLetter(photo.title)}
-                   width={150}
-                   height={150}
-                   style={{display: 'block'}}
-              />
+              <NavLink to={RoutePath.PHOTO.replace(':photoId', String(photo.id))}>
+                <img src={onChangeURL(photo.thumbnailUrl)}
+                     alt={capitalizeFirstLetter(photo.title)}
+                     width={150}
+                     height={150}
+                     style={{display: 'block'}}
+                />
+              </NavLink>
             </li>
           )
         }
