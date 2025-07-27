@@ -17,13 +17,12 @@ export const CommentList = ({className}: CommentListProps) => {
   const [comments, setComments] = useState<CommentType[]>([]);
 
   useEffect(() => {
-    if(commentList) {
+    if (commentList) {
       setComments(commentList.slice(1, pageNumber * 5))
     }
   }, [commentList, pageNumber]);
 
-  const handleShowComments = () => setPageNumber( pageNumber + 1)
-
+  const handleShowComments = () => setPageNumber(pageNumber + 1)
 
 
   if (!commentList) {
@@ -36,8 +35,8 @@ export const CommentList = ({className}: CommentListProps) => {
       <h3>Комментарии</h3>
       <ul className={cls.list}>
         {comments?.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)}
-        <li><Button variant='contained' size='m' onClick={handleShowComments}>Показать ещё</Button></li>
       </ul>
+      <Button variant="contained" size="m" onClick={handleShowComments}>Показать ещё</Button>
     </div>
   );
 };
