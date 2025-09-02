@@ -6,19 +6,22 @@ import {
   getSortedPostListSelector,
   PostCard,
   setPostList,
-  useGetPostListQuery
+  useGetPostListQuery,
 } from '@/entities/post';
 import { setUserList, useGetUserListQuery } from '@/entities/user';
-import { useAppSelector, useAppDispatch } from '@/app/providers/storeProvider/hooks';
+import {
+  useAppSelector,
+  useAppDispatch,
+} from '@/app/providers/storeProvider/hooks';
 
-import cls from './PostList.module.css'
+import cls from './PostList.module.css';
 
 export const PostList = () => {
   const dispatch = useAppDispatch();
-  const {data: postList} = useGetPostListQuery();
+  const { data: postList } = useGetPostListQuery();
 
-  const sortedList = useAppSelector(getSortedPostListSelector)
-  const {data: users} = useGetUserListQuery();
+  const sortedList = useAppSelector(getSortedPostListSelector);
+  const { data: users } = useGetUserListQuery();
 
   useEffect(() => {
     if (postList) {
@@ -29,7 +32,7 @@ export const PostList = () => {
     }
   }, [dispatch, postList, users]);
 
-  if(!users || !postList) {
+  if (!users || !postList) {
     return;
   }
 
@@ -42,10 +45,9 @@ export const PostList = () => {
         <PostLengthSelect />
       </div>
       <ul className={cls.list}>
-        {
-          sortedList && resultList.map(post =>
-            <li className={cls.item} key={post.id}
-            >
+        {sortedList &&
+          resultList.map((post) => (
+            <li className={cls.item} key={post.id}>
               <PostCard
                 postId={post.id}
                 title={post.title}
@@ -53,10 +55,8 @@ export const PostList = () => {
                 userId={post.userId}
               />
             </li>
-          )
-        }
+          ))}
       </ul>
     </>
-
-  )
-}
+  );
+};

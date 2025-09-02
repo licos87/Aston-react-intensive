@@ -1,4 +1,9 @@
-import { createEntityAdapter, createSlice, type EntityState, type PayloadAction } from '@reduxjs/toolkit';
+import {
+  createEntityAdapter,
+  createSlice,
+  type EntityState,
+  type PayloadAction,
+} from '@reduxjs/toolkit';
 import type { PostType } from '@/entities/post/model/types/postType.ts';
 
 export interface PostsState extends EntityState<PostType, number> {
@@ -11,7 +16,7 @@ export const postsAdapter = createEntityAdapter<PostType>({
 
 const initialState: PostsState = postsAdapter.getInitialState({
   sortedPostList: [],
-})
+});
 
 const postSlice = createSlice({
   name: 'post',
@@ -26,10 +31,10 @@ const postSlice = createSlice({
     },
     clearSortedPost(state) {
       state.sortedPostList = [];
-
-    }
-  }
+    },
+  },
 });
 
-export const {setPostList, setSortedPostList, clearSortedPost } = postSlice.actions;
+export const { setPostList, setSortedPostList, clearSortedPost } =
+  postSlice.actions;
 export const postsReducer = postSlice.reducer;
