@@ -1,6 +1,8 @@
 @import url("global.css");
 
 #root {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 }
@@ -13,6 +15,10 @@ a {
 
 a:hover {
   color: color-mix(in oklab, var(--font-color-secondary) 90%, #000);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {

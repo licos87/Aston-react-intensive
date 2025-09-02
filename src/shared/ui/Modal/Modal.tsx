@@ -1,10 +1,12 @@
 import { createPortal } from 'react-dom'
 import React, { type ReactNode, useEffect } from 'react';
 import clsx from 'clsx';
-import { Button } from '@/shared/ui/Button';
-import CloseIcon from '@/shared/assets/close.svg'
 
 import cls from './Modal.module.css'
+import { ModalContext } from './ModalContext';
+import { ModalFooter } from '@/shared/ui/Modal/components/ModalFooter.tsx';
+import { ModalBody } from '@/shared/ui/Modal/components/ModalBody.tsx';
+import { ModalHeader } from '@/shared/ui/Modal/components/ModalHeader.tsx';
 
 type ModalProps = {
   children?: ReactNode;
@@ -12,25 +14,27 @@ type ModalProps = {
   onClose: () => void;
 }
 
-export const Modal = ({children, className, onClose}: ModalProps) => {
+const Modal = ({children, className, onClose}: ModalProps) => {
   const modalRoot = document.getElementById('modal-root');
 
   useEffect(() => {
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
 
-    const handleEscDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleEscDown);
+      const handleEscDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onClose();
+      };
+      window.addEventListener('keydown', handleEscDown);
 
-    return () => {
-      window.removeEventListener('keydown', handleEscDown);
-      document.body.style.overflow = originalOverflow;
-    }
+      return () => {
+        window.removeEventListener('keydown', handleEscDown);
+        document.body.style.overflow = originalOverflow;
+      }
   }, [onClose]);
 
-  if (!modalRoot) return null;
+  if(!modalRoot) {
+    return null;
+  }
 
   const handleOverlayClick = () => {
     onClose();
@@ -41,35 +45,20 @@ export const Modal = ({children, className, onClose}: ModalProps) => {
   };
 
   return createPortal(
+    <ModalContext.Provider value={{ onClose }}>
     <div className={cls.overlay} onClick={handleOverlayClick}>
       <div className={clsx(cls.modal, className)} onClick={handleContentClick}>
-        <div className={cls.modalTop}>
-          <h4 className={cls.title}>О проекте</h4>
-          <Button className={cls.closeBtn}
-                  variant="outlined"
-                  size="s"
-                  onClick={onClose}
-                  title="Закрыть"
-          >
-            <img src={CloseIcon}
-                 width={30}
-                 height={30}
-                 alt="Закрыть"
-            />
-          </Button>
-        </div>
-        <div className={cls.body}>
-          <p className={cls.text}>
-            Проект создан для глубокого освоения современного стека разработки на React. Мы используем Vite для
-            сверхбыстрой сборки и TypeScript для строгой типизации, реализуя архитектуру Feature-Sliced Design (FSD) для
-            масштабируемости. Динамическое управление классами компонентов обеспечивается библиотекой clsx, а качество
-            кода контролируется ESLint и Stylelint. Интеграция этих инструментов создаёт отлаженный workflow с
-            автоматическими проверками. Этот стек служит эталонным шаблоном для production-приложений.
-          </p>
-          {children}
-        </div>
+        {children}
       </div>
-    </div>,
+    </div>
+    </ModalContext.Provider>,
     modalRoot
   )
 }
+
+// Компоненты
+Modal.Header = ModalHeader;
+Modal.Body = ModalBody;
+Modal.Footer = ModalFooter;
+
+export {Modal};

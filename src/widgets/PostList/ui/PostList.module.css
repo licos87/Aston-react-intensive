@@ -22,3 +22,9 @@
   border-radius: 10px;
   font-weight: 600;
 }
+
+.controls {
+  display: flex;
+  gap: 20px;
+  justify-content: end;
+}

@@ -1,27 +1,31 @@
+import { NavLink } from 'react-router-dom';
+
+import { RoutePath } from '@/shared/constants';
+
 import cls from './PostCard.module.css'
+import { User } from '@/entities/user';
+import { capitalizeFirstLetter } from '@/shared/lib/capitalizeFirstLetter';
 
 interface PostCardProps {
+  postId: number;
   title: string;
-  imgUrl: string;
-  imgAlt: string;
   text: string;
+  userId?: number
 }
 
-export const PostCard = ({title, imgUrl, imgAlt, text}: PostCardProps) => {
+export const PostCard = ({postId, userId, title, text}: PostCardProps) => {
 
   return (
-    <div className={cls.card}>
-      <div className={cls.cardTop}>
-        <h3 className={cls.title}>{title}</h3>
+    <NavLink to={RoutePath.POST.replace(':postId', String(postId))}>
+      <div className={cls.card}>
+        <div className={cls.cardTop}>
+          <h4 className={cls.title}>{capitalizeFirstLetter(title)}</h4>
+        </div>
+        <div className={cls.body}>
+          <p className={cls.text}>{capitalizeFirstLetter(text)}</p>
+          {userId && <User userID={userId}/>}
+        </div>
       </div>
-      <div className={cls.body}>
-        <img
-          className={cls.img}
-          src={imgUrl}
-          alt={imgAlt}
-        />
-        <p className={cls.text}>{text}</p>
-      </div>
-    </div>
+    </NavLink>
   )
 }
