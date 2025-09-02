@@ -4,6 +4,7 @@ export const RoutePath = {
   USER: '/user/:userId',
   POSTS: 'posts',
   ALBUMS: 'albums',
+  PHOTO: 'photo/:photoId',
   TODOS: 'todos',
   NOT_FOUND: '*',
 } as const;

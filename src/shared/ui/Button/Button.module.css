@@ -19,7 +19,9 @@
 }
 
 .outlined {
-  background-color: inherit;
+  border: transparent;
+  background-color: transparent;
+  outline: none;
 }
 
 .contained {
